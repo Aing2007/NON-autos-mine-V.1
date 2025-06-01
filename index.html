@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Stream Example</title>
+    <style>
+        #webcam {
+            width: 100%;
+            height: auto;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Webcam Stream Example</h1>
+    <video id="webcam" autoplay></video>
+    <script>
+        // ตรวจสอบการสนับสนุน getUserMedia
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) 
+        {
+            // ขอการเข้าถึงกล้อง
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                // ตั้งค่าหมายเหตุของกล้องที่ได้
+                var video = document.getElementById('webcam');
+                video.srcObject = stream;
+                video.play();
+            }).catch(function(error) {
+                console.error("Error accessing webcam: ", error);
+            });
+        } 
+        else 
+        {
+            alert("getUserMedia not supported on your browser!");
+        }
+    </script>
+    
+</body>
+</html>
